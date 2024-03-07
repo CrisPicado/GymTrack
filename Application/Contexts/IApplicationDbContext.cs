@@ -1,18 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Clients;
+using Domain.Coaches;
+using Domain.Equipments;
+using Domain.Exercises;
+using Domain.Routines;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Contexts
 {
     public interface IApplicationDbContext
     {
-        DbSet<Entrenador> Entrenador { get; set; }
-        DbSet<Rutina> Rutina { get; set; }
-        DbSet<Usuarios> Usuarios { get; set; }
-        DbSet<Ejercicio> Ejercicios { get; set; }
+
+        DbSet<Client> Clients { get; set; }
+        DbSet<Coach> Coaches { get; set; }
+        DbSet<Equipment> Equipments { get; set; }
+        DbSet<Exercise> Exercises { get; set; }
+        DbSet<Routine> Routines { get; set; }
+
         void Save();
     }
 }
