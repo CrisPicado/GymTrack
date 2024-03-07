@@ -1,2 +1,2 @@
 # GymTrack
-Proyecto Curso Programación Avanzada en Web 
+Proyecto Curso Programaci�n Avanzada en Web 
