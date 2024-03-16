@@ -78,8 +78,6 @@ namespace Domain.Routines
 
         public List<Client> Clients { get; set; }
 
-        public List<Coach> Coaches { get; set; }
-
         public List<Exercise> Exercises { get; set; }
     }
 }

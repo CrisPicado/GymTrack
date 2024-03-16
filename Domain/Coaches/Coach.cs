@@ -24,7 +24,6 @@ namespace Domain.Coaches
                 Id = id,
                 FirstName = firstName,
                 LastName = lastName,
-                Dni = dni,
                 Email = email,
                 PhoneNumber = phoneNumber,
                 Active = active
@@ -38,7 +37,6 @@ namespace Domain.Coaches
                 Id = id,
                 FirstName = client.FirstName,
                 LastName = client.LastName,
-                Dni = client.Dni,
                 Email = client.Email,
                 PhoneNumber = client.PhoneNumber,
                 Active = client.Active
@@ -55,10 +53,6 @@ namespace Domain.Coaches
         [Required(AllowEmptyStrings = false)]
         [StringLength(40, MinimumLength = 2)]
         public string LastName { get; set; }
-
-        [Required(AllowEmptyStrings = false)]
-        [StringLength(11, MinimumLength = 9)]
-        public string Dni { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(150, MinimumLength = 5)]
