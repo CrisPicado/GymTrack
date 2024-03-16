@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Coaches;
+using Domain.Routines;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,18 +16,20 @@ namespace Domain.Clients
             
         }
 
-        public static Client Create(int id, string firstName, string lastName, string dni,
-            string email, string phoneNumber, bool active)
+        public static Client Create(int id, string firstName, string lastName, DateTime birthDate,
+            string email, string phoneNumber, bool active, double? height, double? weight)
         {
             return new()
             {
                 Id = id,
                 FirstName = firstName,
                 LastName = lastName,
-                Dni = dni,
+                BirthDate = birthDate,
                 Email = email,
                 PhoneNumber = phoneNumber,
-                Active = active
+                Active = active,
+                Height = height,
+                Weight = weight
             };
         }
 
@@ -36,10 +40,12 @@ namespace Domain.Clients
                 Id = id,
                 FirstName = client.FirstName,
                 LastName = client.LastName,
-                Dni = client.Dni,
+                BirthDate = client.BirthDate,
                 Email = client.Email,
                 PhoneNumber = client.PhoneNumber,
-                Active = client.Active
+                Active = client.Active,
+                Height = client.Height,
+                Weight = client.Weight
             };
         }
 
@@ -54,9 +60,10 @@ namespace Domain.Clients
         [StringLength(40, MinimumLength = 2)]
         public string LastName { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        [StringLength(11, MinimumLength = 9)]
-        public string Dni { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Range(typeof(DateTime), minimum: "1900-01-01", maximum: "2024-01-01")]
+        public DateTime BirthDate { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(150, MinimumLength = 5)]
@@ -67,7 +74,16 @@ namespace Domain.Clients
         [StringLength(15, MinimumLength = 8)]
         public string PhoneNumber { get; set; }
 
+
+        public double? Height { get; set; }
+
+        public double? Weight { get; set; }
+
         [Required]
-        public bool Active {  get; set; }
+        public bool Active { get; set; }
+
+        public List<Coach>  Coaches { get; set; }
+
+        public List<Routine> Routines { get; set; }
     }
 }

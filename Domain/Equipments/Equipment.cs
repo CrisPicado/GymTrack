@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Exercises;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -44,5 +45,6 @@ namespace Domain.Equipments
         [Required]
         public string Description { get; set; }
 
+        public List<Exercise> exercises { get; set; }
     }
 }
