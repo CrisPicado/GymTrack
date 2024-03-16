@@ -28,7 +28,7 @@ namespace Domain.Exercises
                 Weight = weight,
                 Equipments = equipments,
                 Routines = new List<Routine>()
-            };
+            };     
         }
 
         public static Exercise Create(int id, Exercise exercise)
