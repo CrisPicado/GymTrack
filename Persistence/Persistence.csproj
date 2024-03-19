@@ -22,19 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contexts\" />
-    <Folder Include="Clients\" />
-    <Folder Include="Coaches\" />
     <Folder Include="Equipments\" />
     <Folder Include="Exercises\" />
-    <Folder Include="Clients\" />
-    <Folder Include="Coaches\" />
-    <Folder Include="Contexts\" />
     <Folder Include="Equipments\" />
     <Folder Include="Exercises\" />
     <Folder Include="Routines\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Repositories\" />
     <Folder Include="Routines\" />
   </ItemGroup>
 
