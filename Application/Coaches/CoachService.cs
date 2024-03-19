@@ -14,6 +14,7 @@ namespace Application.Coaches
         {
             return Result.Success<IList<Coach>>(_repository.GetAll());
         }
+
         public Result<Coach> Get(int id)
         {
             var coach = _repository.Get(c => c.Id == id);
@@ -25,6 +26,7 @@ namespace Application.Coaches
 
             return Result.Success(coach);
         }
+
         public Result Create(CreateCoach createCoach)
         {
             var coach = _mapper.Map<CreateCoach, Coach>(createCoach);
@@ -32,6 +34,7 @@ namespace Application.Coaches
             _repository.Save();
             return Result.Success();
         }
+
         public Result Update(UpdateCoach updateCoach)
         {
             var result = Get(updateCoach.Id);
@@ -60,10 +63,6 @@ namespace Application.Coaches
             _repository.Save();
             return Result.Success();
         }
-
-
-
-
 
     }
 }
