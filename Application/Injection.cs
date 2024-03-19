@@ -1,5 +1,6 @@
 ﻿using Application.Clients;
 using Application.Coaches;
+using Application.Equipments;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +18,7 @@ namespace Application
         {
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<ICoachService, CoachService>();
+            services.AddScoped<IEquipmentsService, EquipmentsService>();
             services.AddAutoMapper(typeof(ClientProfile));
             services.AddAutoMapper(typeof(CoachProfile));
 

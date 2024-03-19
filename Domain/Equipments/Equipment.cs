@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Equipments
 {
-    public class Equipment
+    public class Equipment : Entity
     {
 
         public Equipment()
@@ -44,7 +45,7 @@ namespace Domain.Equipments
 
         [Required]
         public string Description { get; set; }
-
+        [NotMapped]
         public List<Exercise> exercises { get; set; }
     }
 }

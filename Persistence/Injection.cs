@@ -1,14 +1,17 @@
 ﻿using Application.Clients;
 using Application.Coaches;
 using Application.Contexts;
+using Application.Equipments;
 using Domain.Clients;
 using Domain.Coaches;
+using Domain.Equipments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Clients;
 using Persistence.Coaches;
 using Persistence.Contexts;
+using Persistence.Equipments;
 using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
@@ -35,7 +38,8 @@ namespace Persistence
 
             services.AddRepository<Client, IClientRepository, ClientRepository>();
             services.AddRepository<Coach, ICoachRepository, CoachRepository>();
-            
+            services.AddRepository<Equipment, IEquipmentsRepository, EquipmentsRepository>();
+
 
             return services;
         }
