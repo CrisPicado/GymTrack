@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Coaches
 {
-    public class Coach
+    public class Coach : Entity
     {
         public Coach()
         {
