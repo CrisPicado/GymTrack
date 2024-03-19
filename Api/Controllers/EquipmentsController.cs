@@ -1,6 +1,4 @@
-﻿using Application.Clients;
-using Application.Equipments;
-using Domain.Clients;
+﻿using Application.Equipments;
 using Domain.Equipments;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +71,7 @@ namespace Api.Controllers
                 return Accepted();
             }
 
-            if (result.Error == ClientErrors.NotFound())
+            if (result.Error == EquipmentsErrors.NotFound())
             {
                 return NotFound();
             }
