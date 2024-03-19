@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Coaches\" />
-    <Folder Include="Clients\" />
     <Folder Include="Equipments\" />
     <Folder Include="Exercises\" />
     <Folder Include="Routines\" />

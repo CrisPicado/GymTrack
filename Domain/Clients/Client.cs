@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Clients
 {
-    public class Client
+    public class Client : Entity
     {
         public Client()
         {
