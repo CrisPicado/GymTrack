@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Clients;
+using AutoMapper;
 using Domain.Coaches;
 using Shared;
 
@@ -9,6 +10,12 @@ namespace Application.Coaches
     {
         private readonly ICoachRepository _repository;
         private readonly IMapper _mapper;
+
+        public CoachService(ICoachRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
 
         public Result<IList<Coach>> List()
         {

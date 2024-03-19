@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Clients;
+using Domain.Coaches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Application.Clients
     {
         public ClientProfile() 
         {
-            CreateMap<CreateClient, Client>()
+            CreateMap<CreateClient, Coach>()
                 .ForMember(destination => destination.PhoneNumber,
                     source => source.MapFrom(s=>s.PhoneNumber));
 
