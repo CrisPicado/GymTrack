@@ -3,13 +3,14 @@ using Domain.Routines;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Exercises
 {
-    public class Exercise
+    public class Exercise : Entity
     {
         public Exercise()
         {
@@ -63,10 +64,10 @@ namespace Domain.Exercises
 
         public double? Weight { get; set; }
 
-        public int? DurationInSeconds { get; set; }
-
+        [NotMapped]
         public List<Equipment> Equipments { get; set; }
 
+        [NotMapped]
         public List<Routine> Routines { get; set; } 
     }
 }
