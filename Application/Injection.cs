@@ -24,7 +24,7 @@ namespace Application
             services.AddAutoMapper(typeof(ClientProfile));
             services.AddAutoMapper(typeof(CoachProfile));
             services.AddAutoMapper(typeof(ExerciseProfile));
-            services.AddAutoMapper(typeof(EquipmentProfile));
+            services.AddAutoMapper(typeof(EquipmentsProfile));
 
             return services;
         }
