@@ -10,10 +10,11 @@ namespace Domain.Equipments
     public class UpdateEquipments
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        //public List<Exercise> exercises { get; set; }
+        //public Exercise exercise { get; set; }
     }
 }

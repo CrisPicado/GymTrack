@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Routines;
+using Application.Routines;
+using Persistence.Routines;
 
 namespace Persistence
 {
@@ -43,6 +46,7 @@ namespace Persistence
             services.AddRepository<Coach, ICoachRepository, CoachRepository>();
             services.AddRepository<Exercise, IExerciseRepository, ExerciseRepository>();
             services.AddRepository<Equipment, IEquipmentsRepository, EquipmentsRepository>();
+            services.AddRepository<Routine, IRoutineRepository, RoutineRepository>();
 
 
             return services;

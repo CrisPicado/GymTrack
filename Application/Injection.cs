@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Routines;
 
 namespace Application
 {
@@ -21,10 +22,12 @@ namespace Application
             services.AddScoped<ICoachService, CoachService>();
             services.AddScoped<IExerciseService, ExerciseService>();
             services.AddScoped<IEquipmentsService, EquipmentsService>();
+            services.AddScoped<IRoutineService, RoutineService>();
             services.AddAutoMapper(typeof(ClientProfile));
             services.AddAutoMapper(typeof(CoachProfile));
             services.AddAutoMapper(typeof(ExerciseProfile));
             services.AddAutoMapper(typeof(EquipmentsProfile));
+            services.AddAutoMapper(typeof(RoutineProfile));
 
             return services;
         }

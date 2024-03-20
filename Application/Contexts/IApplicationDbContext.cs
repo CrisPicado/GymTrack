@@ -13,9 +13,9 @@ namespace Application.Contexts
 
         DbSet<Client> Clients { get; set; }
         DbSet<Coach> Coaches { get; set; }
-        DbSet<Equipment> Equipments { get; set; }
         DbSet<Exercise> Exercises { get; set; }
-        //DbSet<Routine> Routines { get; set; }
+        DbSet<Equipment> Equipments { get; set; }
+        DbSet<Routine> Routines { get; set; }
 
         void Save();
     }

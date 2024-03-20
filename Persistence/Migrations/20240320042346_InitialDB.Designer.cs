@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320042346_InitialDB")]
+    partial class InitialDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +38,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CoachId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -63,6 +69,8 @@ namespace Persistence.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
 
                     b.ToTable("Clients");
                 });
@@ -115,11 +123,16 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
 
                     b.ToTable("Equipments");
                 });
@@ -131,9 +144,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EquipmentId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -153,8 +163,6 @@ namespace Persistence.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EquipmentId");
 
                     b.ToTable("Exercises");
                 });
@@ -208,15 +216,26 @@ namespace Persistence.Migrations
                     b.ToTable("ExerciseRoutine");
                 });
 
-            modelBuilder.Entity("Domain.Exercises.Exercise", b =>
+            modelBuilder.Entity("Domain.Clients.Client", b =>
                 {
-                    b.HasOne("Domain.Equipments.Equipment", "Equipment")
-                        .WithMany("Exercises")
-                        .HasForeignKey("EquipmentId")
+                    b.HasOne("Domain.Coaches.Coach", "Coach")
+                        .WithMany("Clients")
+                        .HasForeignKey("CoachId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Equipment");
+                    b.Navigation("Coach");
+                });
+
+            modelBuilder.Entity("Domain.Equipments.Equipment", b =>
+                {
+                    b.HasOne("Domain.Exercises.Exercise", "Exercise")
+                        .WithMany("Equipments")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("Domain.Routines.Routine", b =>
@@ -260,12 +279,14 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Coaches.Coach", b =>
                 {
+                    b.Navigation("Clients");
+
                     b.Navigation("Routines");
                 });
 
-            modelBuilder.Entity("Domain.Equipments.Equipment", b =>
+            modelBuilder.Entity("Domain.Exercises.Exercise", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("Equipments");
                 });
 #pragma warning restore 612, 618
         }

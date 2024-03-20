@@ -13,7 +13,7 @@ namespace Application.Clients
     {
         public ClientProfile() 
         {
-            CreateMap<CreateClient, Coach>()
+            CreateMap<CreateClient, Client>()
                 .ForMember(destination => destination.PhoneNumber,
                     source => source.MapFrom(s=>s.PhoneNumber));
 

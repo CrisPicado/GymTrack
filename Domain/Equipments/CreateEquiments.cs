@@ -15,6 +15,5 @@ namespace Domain.Equipments
 
         public string Description { get; set; }
 
-        //public List<Exercise> exercises { get; set; }
     }
 }

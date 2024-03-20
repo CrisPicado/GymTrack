@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Exercises
@@ -17,7 +18,7 @@ namespace Domain.Exercises
             
         }
 
-        public static Exercise Create(int id, string name, string targetZone, int? sets, int? repeats, double? weight, List<Equipment> equipments)
+        public static Exercise Create(int id, string name, string targetZone, int? sets, int? repeats, double? weight, int equipmentId)
         {
             return new Exercise
             {
@@ -27,9 +28,7 @@ namespace Domain.Exercises
                 Sets = sets,
                 Repeats = repeats,
                 Weight = weight,
-                Equipments = equipments,
-                Routines = new List<Routine>()
-
+                EquipmentId = equipmentId
             };     
 
         }
@@ -44,8 +43,7 @@ namespace Domain.Exercises
                 Sets = exercise.Sets,
                 Repeats = exercise.Repeats,
                 Weight = exercise.Weight,
-                Equipments = exercise.Equipments,
-                Routines = new List<Routine>()
+                EquipmentId = exercise.EquipmentId
             };
         }
 
@@ -64,10 +62,12 @@ namespace Domain.Exercises
 
         public double? Weight { get; set; }
 
-        [NotMapped]
-        public List<Equipment> Equipments { get; set; }
+        public int EquipmentId { get; set; }
 
-        [NotMapped]
-        public List<Routine> Routines { get; set; } 
+        [JsonIgnore]
+        public virtual Equipment Equipment { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Routine> Routines { get; set; } 
     }
 }

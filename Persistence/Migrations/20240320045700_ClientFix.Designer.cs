@@ -12,33 +12,18 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240319062411_AddExercise")]
-    partial class AddExercise
+    [Migration("20240320045700_ClientFix")]
+    partial class ClientFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ClientCoach", b =>
-                {
-                    b.Property<int>("ClientsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CoachesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClientsId", "CoachesId");
-
-                    b.HasIndex("CoachesId");
-
-                    b.ToTable("ClientCoach");
-                });
 
             modelBuilder.Entity("Domain.Clients.Client", b =>
                 {
@@ -121,7 +106,7 @@ namespace Persistence.Migrations
                     b.ToTable("Coaches");
                 });
 
-            modelBuilder.Entity("Domain.Exercises.Exercise", b =>
+            modelBuilder.Entity("Domain.Equipments.Equipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,8 +114,31 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DurationInSeconds")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("Domain.Exercises.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -154,19 +162,113 @@ namespace Persistence.Migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("ClientCoach", b =>
+            modelBuilder.Entity("Domain.Routines.Routine", b =>
                 {
-                    b.HasOne("Domain.Clients.Client", null)
-                        .WithMany()
-                        .HasForeignKey("ClientsId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SequenceNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("Routines");
+                });
+
+            modelBuilder.Entity("ExerciseRoutine", b =>
+                {
+                    b.Property<int>("ExercisesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoutinesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExercisesId", "RoutinesId");
+
+                    b.HasIndex("RoutinesId");
+
+                    b.ToTable("ExerciseRoutine");
+                });
+
+            modelBuilder.Entity("Domain.Equipments.Equipment", b =>
+                {
+                    b.HasOne("Domain.Exercises.Exercise", "Exercise")
+                        .WithMany("Equipments")
+                        .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Coaches.Coach", null)
-                        .WithMany()
-                        .HasForeignKey("CoachesId")
+                    b.Navigation("Exercise");
+                });
+
+            modelBuilder.Entity("Domain.Routines.Routine", b =>
+                {
+                    b.HasOne("Domain.Clients.Client", "Client")
+                        .WithMany("Routines")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Coaches.Coach", "Coach")
+                        .WithMany("Routines")
+                        .HasForeignKey("CoachId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Coach");
+                });
+
+            modelBuilder.Entity("ExerciseRoutine", b =>
+                {
+                    b.HasOne("Domain.Exercises.Exercise", null)
+                        .WithMany()
+                        .HasForeignKey("ExercisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Routines.Routine", null)
+                        .WithMany()
+                        .HasForeignKey("RoutinesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Clients.Client", b =>
+                {
+                    b.Navigation("Routines");
+                });
+
+            modelBuilder.Entity("Domain.Coaches.Coach", b =>
+                {
+                    b.Navigation("Routines");
+                });
+
+            modelBuilder.Entity("Domain.Exercises.Exercise", b =>
+                {
+                    b.Navigation("Equipments");
                 });
 #pragma warning restore 612, 618
         }

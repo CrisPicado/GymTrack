@@ -6,32 +6,33 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Domain.Routines
 {
-    public class Routine
+    public class Routine : Entity
     {
         public Routine()
         {
             
         }
 
-        public static Routine Create(int id, string name, string description, int sequenceNumber, List<Exercise> exercises)
-        {
-            return new()
-            {
-                Id = id,
-                Name = name,
-                Description = description,
-                SequenceNumber = sequenceNumber,
-                Exercises = exercises
-            };
+        //public static Routine Create(int id, string name, string description, int sequenceNumber, List<Exercise> exercises)
+        //{
+        //    return new()
+        //    {
+        //        Id = id,
+        //        Name = name,
+        //        Description = description,
+        //        SequenceNumber = sequenceNumber,
+        //        Exercises = exercises
+        //    };
 
-        }
+        //}
 
-        public static Routine Create(int id, string name, string description, int sequenceNumber, List<Exercise> exercises, List<Client> clients, Coach coach)
+        public static Routine Create(int id, string name, string description, int sequenceNumber, int coachId,  int clientId)
         {
             return new Routine
             {
@@ -39,10 +40,9 @@ namespace Domain.Routines
                 Name = name,
                 Description = description,
                 SequenceNumber = sequenceNumber,
-                Exercises = exercises,
-                Clients = clients,
-                CoachId = coach.Id,
-                Coach = coach
+                CoachId = coachId,
+                ClientId = clientId,
+
             };
         }
 
@@ -55,9 +55,8 @@ namespace Domain.Routines
                 Description = routine.Description,
                 SequenceNumber = routine.SequenceNumber,
                 Exercises = routine.Exercises,
-                Clients = routine.Clients,
-                CoachId = routine.Coach.Id,
-                Coach = routine.Coach
+                ClientId = routine.ClientId,
+                CoachId = routine.CoachId
             };
         }
 
@@ -74,10 +73,13 @@ namespace Domain.Routines
         public int SequenceNumber { get; set; }
 
         public int CoachId { get; set; }
-        public Coach Coach { get; set; }
+        [JsonIgnore]
+        public virtual Coach Coach { get; set; }
 
-        public List<Client> Clients { get; set; }
+        public int ClientId { get; set; }
+        [JsonIgnore]
+        public virtual Client Client { get; set; }
 
-        public List<Exercise> Exercises { get; set; }
+        public virtual List<Exercise> Exercises { get; set; }
     }
 }

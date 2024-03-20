@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Routines;
 
 namespace Persistence.Contexts
 {
@@ -22,6 +23,7 @@ namespace Persistence.Contexts
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Routine> Routines { get; set; }
 
         public void Save()
         {

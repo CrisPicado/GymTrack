@@ -26,8 +26,6 @@
     <Folder Include="Equipments\" />
 	<Folder Include="Exercises\" />
 	<Folder Include="Exercises\" />
-    <Folder Include="Routines\" />
-    <Folder Include="Routines\" />
   </ItemGroup>
 
 </Project>
