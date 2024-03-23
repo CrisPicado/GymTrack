@@ -25,6 +25,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Register Client</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Routines" asp-action="Index">Routines Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Access Management and Privileges</a>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Maintenances
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Equipments" asp-action="Index">Equipments</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Exercises" asp-action="Index">Exercises</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Clients" asp-action="Index">Clients</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,18 @@
 using Application;
 using Persistence;
 
+const string LOCAL_HOST_CORS = "Web";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: LOCAL_HOST_CORS, policy =>
+    {
+        policy.WithOrigins("http://localhost:8003", "https://localhost:44303")
+        .WithHeaders("*")
+        .WithMethods("*");
+    });
+});
 
 // Add services to the container.
 
@@ -22,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(LOCAL_HOST_CORS);
 
 app.UseAuthorization();
 

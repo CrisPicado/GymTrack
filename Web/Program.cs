@@ -1,7 +1,32 @@
+using Application;
+using Application.Clients;
+using Persistence;
+using Domain.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
+
+var endpoints = builder.Configuration.GetSection
+            (nameof(EndpointConfiguration)).Get<List<EndpointConfiguration>>();
+
+builder.Services.Configure<List<EndpointConfiguration>>
+    (options =>
+    {
+        options.AddRange(endpoints);
+    });
+
+builder.Services.AddHttpClient<IClientContract, ClientImp>((provider, client) =>
+{
+    var endpoint = endpoints.Where
+        (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+    client.BaseAddress = new Uri(endpoint.Uri);
+
+});
+
 
 var app = builder.Build();
 

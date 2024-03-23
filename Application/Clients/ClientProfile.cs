@@ -18,7 +18,13 @@ namespace Application.Clients
                     source => source.MapFrom(s=>s.PhoneNumber));
 
             CreateMap<UpdateClient, Client>()
-            .ForMember(destination => destination.Id, source => source.Ignore());
+                .ForMember(destination => destination.Id, source => source.Ignore());
+
+            CreateMap<Client, UpdateClient>();
+
+            CreateMap<Client, ClientDTO>()
+                .ConstructUsing(source =>
+                new ClientDTO(source.Id, string.Concat(source.FirstName, " ", source.LastName)));
 
         }
     }
