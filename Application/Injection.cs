@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Application.Routines;
 using FluentValidation;
 using Domain.Clients;
+using Domain.Routines;
 
 namespace Application
 {
@@ -35,6 +36,8 @@ namespace Application
             //FluentValidation
             services.AddScoped<IValidator<CreateClient>,CreateClientValidator>();
             services.AddScoped<IValidator<UpdateClient>, UpdateClientValidator>();
+            services.AddScoped<IValidator<CreateRoutine>,CreateRoutineValidator>();
+            services.AddScoped<IValidator<UpdateRoutine>,UpdateRoutineValidator>();
 
             return services;
         }

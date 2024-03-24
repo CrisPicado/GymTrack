@@ -97,5 +97,8 @@ namespace Domain.Clients
 
         [JsonIgnore]
         public virtual List<Routine> Routines { get; set; }
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

@@ -71,5 +71,7 @@ namespace Domain.Coaches
         [JsonIgnore]
         public virtual List<Routine> Routines { get; set; }
 
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

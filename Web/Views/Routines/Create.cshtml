@@ -1,0 +1,57 @@
+﻿@using Domain.Routines;
+@using Web.Models;
+
+@model CreateRoutine
+
+@{
+    ViewData["Title"] = "Create Routine";
+}
+
+<h1 class="display-4">Create Routine</h1>
+<hr />
+<div class="container">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group my-3">
+                    <label asp-for="@Model.Name" class="form-label">Name:</label>
+                    <input asp-for="@Model.Name" type="text" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.Description" class="form-label">Description:</label>
+                    <input asp-for="@Model.Description" type="text" class="form-control" />
+                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.SequenceNumber" class="form-label">Sequence Number:</label>
+                    <input asp-for="@Model.SequenceNumber" type="number" class="form-control" />
+                    <span asp-validation-for="@Model.SequenceNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.CoachId" class="form-label">Coach ID:</label>
+                    <input asp-for="@Model.CoachId" type="number" class="form-control" />
+                    <span asp-validation-for="@Model.CoachId" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.ClientId" class="form-label">Client ID:</label>
+                    <input asp-for="@Model.ClientId" type="number" class="form-control" />
+                    <span asp-validation-for="@Model.ClientId" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label class="form-label">Exercise IDs (Separate IDs by commas):</label>
+                    <input type="text" name="ExerciseIds" class="form-control" />
+                    <span asp-validation-for="@Model.ExerciseIds" class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group my-3">
+            @{
+                var partialModel = SaveCancelViewModel.Create(0, "/routines");
+            }
+            <partial name="_SaveCancelButtons" model="partialModel" />
+        </div>
+    </form>
+</div>
