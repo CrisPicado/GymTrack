@@ -46,26 +46,32 @@ namespace Domain.Coaches
         }
 
         [Key]
-        public int Id { get; private set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(40, MinimumLength = 2)]
+        [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(40, MinimumLength = 2)]
+        [JsonPropertyName("lastName")]
         public string LastName { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(150, MinimumLength = 5)]
         [DataType(DataType.EmailAddress)]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(15, MinimumLength = 8)]
+        [JsonPropertyName("phoneNumber")]
         public string PhoneNumber { get; set; }
 
         [Required]
+        [JsonPropertyName("active")]
         public bool Active { get; set; }
 
         [JsonIgnore]

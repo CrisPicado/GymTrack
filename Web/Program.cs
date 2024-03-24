@@ -3,6 +3,7 @@ using Application.Clients;
 using Persistence;
 using Domain.Configuration;
 using Application.Routines;
+using Application.Coaches;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,14 @@ builder.Services.Configure<List<EndpointConfiguration>>
     });
 
 builder.Services.AddHttpClient<IClientContract, ClientImp>((provider, client) =>
+{
+    var endpoint = endpoints.Where
+        (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+    client.BaseAddress = new Uri(endpoint.Uri);
+
+});
+
+builder.Services.AddHttpClient<ICoachClient, CoachClient>((provider, client) =>
 {
     var endpoint = endpoints.Where
         (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
