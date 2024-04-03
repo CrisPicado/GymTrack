@@ -74,7 +74,7 @@ namespace Domain.Exercises
 
         [JsonIgnore]
         [JsonPropertyName("equipmentId")]
-        public int? EquipmentId { get; set; }
+        public int EquipmentId { get; set; }
 
         [JsonInclude]
         [JsonPropertyName("equipment")]

@@ -21,7 +21,7 @@ namespace Domain.Exercises
 
         public double? Weight { get; set; }
 
-        public int? EquipmentId { get; set; }
+        public int EquipmentId { get; set; }
 
         //public List<Routine> Routines { get; set; }
     }
