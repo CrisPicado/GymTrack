@@ -23,12 +23,14 @@ namespace Application.Exercises
 
         public Result<IList<Exercise>> List()
         {
-            return Result.Success<IList<Exercise>>(_repository.GetAll());
+            return Result.Success<IList<Exercise>>(_repository.GetAllIncluding().ToList());
         }
 
         public Result<Exercise> Get(int id)
         {
-            var Exercise = _repository.Get(c => c.Id == id);
+            var Exercise = _repository.GetAllIncluding()
+                .FirstOrDefault(c => c.Id == id);
+
             if (Exercise is null)
             {
                 return Result.Failure<Exercise>(ExerciseErrors.NotFound());

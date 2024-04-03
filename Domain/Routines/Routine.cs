@@ -78,6 +78,7 @@ namespace Domain.Routines
         [JsonPropertyName("sequenceNumber")]
         public int SequenceNumber { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("coachId")]
         public int CoachId { get; set; }
 
@@ -85,6 +86,7 @@ namespace Domain.Routines
         [JsonPropertyName("coach")]
         public virtual Coach Coach { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("clientId")]
         public int ClientId { get; set; }
 

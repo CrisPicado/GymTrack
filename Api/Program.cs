@@ -1,5 +1,6 @@
 using Application;
 using Persistence;
+using System.Text.Json.Serialization;
 
 const string LOCAL_HOST_CORS = "Web";
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,11 @@ builder.Services.AddCors(options =>
 });
 
 // Add services to the container.
-
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -22,7 +22,8 @@ namespace Persistence.Routines
             return _context.Routines
                 .Include(r => r.Coach)
                 .Include(r => r.Client)
-                .Include(r => r.Exercises);
+                .Include(r => r.Exercises)
+                .ThenInclude(e=> e.Equipment);
         }
     }
 }

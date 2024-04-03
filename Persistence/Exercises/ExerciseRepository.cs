@@ -2,6 +2,7 @@
 using Application.Exercises;
 using Domain.Clients;
 using Domain.Exercises;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
 using Persistence.Repositories;
 using System;
@@ -19,5 +20,11 @@ namespace Persistence.Exercises
             : base(context)
         { }
 
+        public IQueryable<Exercise> GetAllIncluding()
+        {
+            return _context.Exercises
+                .Include(e=>e.Equipment)
+                .Include(r=>r.Routines);
+        }
     }
 }

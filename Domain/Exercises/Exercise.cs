@@ -15,7 +15,7 @@ namespace Domain.Exercises
     {
         public Exercise()
         {
-            
+
         }
 
         public static Exercise Create(int id, string name, string targetZone, int? sets, int? repeats, double? weight, int equipmentId)
@@ -29,7 +29,7 @@ namespace Domain.Exercises
                 Repeats = repeats,
                 Weight = weight,
                 EquipmentId = equipmentId
-            };     
+            };
 
         }
 
@@ -48,26 +48,39 @@ namespace Domain.Exercises
         }
 
         [Key]
-        public int Id {  get; set; }
+        public int Id { get; set; }
 
         [Required]
+        [JsonInclude]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         [Required]
+        [JsonInclude]
+        [JsonPropertyName("targetZone")]
         public string TargetZone { get; set; }
 
+        [JsonInclude]
+        [JsonPropertyName("sets")]
         public int? Sets { get; set; }
 
+        [JsonInclude]
+        [JsonPropertyName("repeats")]
         public int? Repeats { get; set; }
 
+        [JsonInclude]
+        [JsonPropertyName("weight")]
         public double? Weight { get; set; }
 
-        public int EquipmentId { get; set; }
+        [JsonIgnore]
+        [JsonPropertyName("equipmentId")]
+        public int? EquipmentId { get; set; }
+
+        [JsonInclude]
+        [JsonPropertyName("equipment")]
+        public Equipment Equipment { get; set; }
 
         [JsonIgnore]
-        public virtual Equipment Equipment { get; set; }
-
-        [JsonIgnore]
-        public virtual List<Routine> Routines { get; set; } 
+        public virtual List<Routine> Routines { get; set; }
     }
 }
