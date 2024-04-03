@@ -52,20 +52,20 @@ namespace Api.Controllers
 
             if (result.IsSuccess)
             {
-                return Created();
+                return StatusCode(StatusCodes.Status201Created);
             }
 
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Update([FromBody] UpdateCoach coach)
         {
             var result = _service.Update(coach);
 
             if (result.IsSuccess)
             {
-                return Accepted();
+                return StatusCode(StatusCodes.Status202Accepted);
             }
 
             if (result.Error == CoachErrors.NotFound())

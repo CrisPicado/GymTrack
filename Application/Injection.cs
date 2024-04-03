@@ -13,6 +13,7 @@ using Application.Routines;
 using FluentValidation;
 using Domain.Clients;
 using Domain.Routines;
+using Domain.Coaches;
 
 namespace Application
 {
@@ -36,6 +37,8 @@ namespace Application
             //FluentValidation
             services.AddScoped<IValidator<CreateClient>,CreateClientValidator>();
             services.AddScoped<IValidator<UpdateClient>, UpdateClientValidator>();
+            services.AddScoped<IValidator<CreateCoach>, CreateCoachValidator>();
+            services.AddScoped<IValidator<UpdateCoach>, UpdateCoachValidator>();
             services.AddScoped<IValidator<CreateRoutine>,CreateRoutineValidator>();
             services.AddScoped<IValidator<UpdateRoutine>,UpdateRoutineValidator>();
 
