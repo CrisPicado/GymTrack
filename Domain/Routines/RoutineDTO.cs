@@ -1,4 +1,6 @@
-﻿using Domain.Coaches;
+﻿using Domain.Clients;
+using Domain.Coaches;
+using Domain.Exercises;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,20 @@ namespace Domain.Routines
         }
 
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
+        public int SequenceNumber { get; set; }
+
+        public int CoachId { get; set; }
         public Coach Coach { get; set; }
+
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
+
+        public List<Exercise> Exercises { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Equipments
 {
-    public class CreateEquiments
+    public class CreateEquipments
     {
         public string Name { get; set; }
 

@@ -18,6 +18,13 @@ namespace Application.Exercises
             CreateMap<UpdateExercise, Exercise>()
             .ForMember(destination => destination.Id, source => source.Ignore());
 
+            CreateMap<Exercise, UpdateExercise>()
+                .ForMember(dest => dest.EquipmentId, opt => opt.MapFrom(src => src.Equipment.Id));
+
+            CreateMap<Exercise, ExerciseDTO>()
+                .ConstructUsing(source =>
+                new ExerciseDTO(source.Id, source.Name, source.TargetZone, source.Sets, source.Repeats, source.Weight, source.EquipmentId, source.Equipment));
+
         }
     }
 }

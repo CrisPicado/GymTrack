@@ -30,21 +30,25 @@
                     <span asp-validation-for="@Model.SequenceNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group my-3">
-                    <label asp-for="@Model.CoachId" class="form-label">Coach ID:</label>
-                    <input asp-for="@Model.CoachId" type="number" class="form-control" />
+                    <label asp-for="@Model.CoachId" class="form-label">Coach:</label>
+                    <select asp-for="@Model.CoachId" asp-items="@Model.Coachs.Select(c => new SelectListItem { Text = c.FullName, Value = c.Id.ToString() })" class="form-control">
+                        <option value="">Select Coach</option>
+                    </select>
                     <span asp-validation-for="@Model.CoachId" class="text-danger"></span>
                 </div>
                 <div class="form-group my-3">
-                    <label asp-for="@Model.ClientId" class="form-label">Client ID:</label>
-                    <input asp-for="@Model.ClientId" type="number" class="form-control" />
+                    <label asp-for="@Model.ClientId" class="form-label">Client:</label>
+                    <select asp-for="@Model.ClientId" asp-items="@Model.Clients.Select(c => new SelectListItem { Text = c.FullName, Value = c.Id.ToString() })" class="form-control">
+                        <option value="">Select Client</option>
+                    </select>
                     <span asp-validation-for="@Model.ClientId" class="text-danger"></span>
                 </div>
                 <div class="form-group my-3">
-                    <label class="form-label">Exercise IDs (Separate IDs by commas):</label>
-                    <input type="text" name="ExerciseIds" class="form-control" />
+                    <label class="form-label">Exercises:</label>
+                    <select asp-for="@Model.ExerciseIds" asp-items="@Model.Exercises.Select(e => new SelectListItem { Text = e.Name, Value = e.Id.ToString() })" multiple class="form-control">
+                    </select>
                     <span asp-validation-for="@Model.ExerciseIds" class="text-danger"></span>
                 </div>
-
             </div>
         </div>
         <div class="form-group my-3">

@@ -48,6 +48,7 @@ namespace Domain.Exercises
         }
 
         [Key]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [Required]

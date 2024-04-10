@@ -2,6 +2,7 @@
 using Domain.Exercises;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Api.Controllers
 {
@@ -56,13 +57,13 @@ namespace Api.Controllers
 
             if (result.IsSuccess)
             {
-                return Created();
+                return StatusCode(StatusCodes.Status201Created);
             }
 
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Update([FromBody] UpdateExercise exercise)
         {
             var result = _service.Update(exercise);

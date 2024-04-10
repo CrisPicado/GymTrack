@@ -39,9 +39,9 @@ namespace Application.Equipments
             return Result.Success(equipment);
         }
 
-        public Result Create(CreateEquiments createEquiments)
+        public Result Create(CreateEquipments createEquiments)
         {
-            var equipment = _mapper.Map<CreateEquiments, Equipment>(createEquiments);
+            var equipment = _mapper.Map<CreateEquipments, Equipment>(createEquiments);
             _repository.Insert(Equipment.Create(0, equipment));
             _repository.Save();
             return Result.Success();

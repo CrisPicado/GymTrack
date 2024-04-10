@@ -49,19 +49,19 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateEquiments equiments)
+        public IActionResult Create([FromBody] CreateEquipments equiments)
         {
             var result = _service.Create(equiments);
 
             if (result.IsSuccess)
             {
-                return Created();
+                return StatusCode(StatusCodes.Status201Created);
             }
 
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Update([FromBody] UpdateEquipments equiments)
         {
             var result = _service.Update(equiments);

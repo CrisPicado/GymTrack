@@ -14,33 +14,39 @@ namespace Web.Controllers
     {
         public readonly IValidator<CreateRoutine> _createValidator;
         public readonly IValidator<UpdateRoutine> _updateValidator;
-        private readonly IRoutineClient _client;
-        private readonly ICoachService _coachService;
-        private readonly IClientService _clientService;
-        private readonly IExerciseService _exerciseService;
+        private readonly IRoutineClient _routine;
+        private readonly ICoachClient _coach;
+        private readonly IClientContract _client;
+        private readonly IExerciseClient _exercise;
         private readonly IMapper _mapper;
 
-        public RoutinesController(IValidator<CreateRoutine> createValidator, IValidator<UpdateRoutine> updateValidator, IRoutineClient client, ICoachService coachService, IClientService clientService, IExerciseService exerciseService, IMapper mapper)
+        public RoutinesController(IValidator<CreateRoutine> createValidator, IValidator<UpdateRoutine> updateValidator, IRoutineClient routine, ICoachClient coach, IClientContract client, IExerciseClient exercise, IMapper mapper)
         {
             _createValidator = createValidator;
             _updateValidator = updateValidator;
+            _routine = routine;
+            _coach = coach;
             _client = client;
-            _coachService = coachService;
-            _clientService = clientService;
-            _exerciseService = exerciseService;
+            _exercise = exercise;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var routines = await _client.List();
+            var routines = await _routine.List();
             return View(routines);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View(new CreateRoutine());
+            var model = new CreateRoutine();
+
+            model.Clients = await _client.List();
+            model.Coachs = await _coach.List();
+            model.Exercises = await _exercise.List();
+
+            return View(model);
         }
 
         [HttpPost]
@@ -53,7 +59,7 @@ namespace Web.Controllers
             }
             else
             {
-                var res = await _client.Create(model);
+                var res = await _routine.Create(model);
                 if (res.IsSuccess)
                 {
                     return RedirectToAction(nameof(Index));

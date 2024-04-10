@@ -23,6 +23,8 @@ namespace Domain.Exercises
 
         public int EquipmentId { get; set; }
 
+        public List<EquipmentDTO> AvailableEquipments { get; set; }
+
         //public List<Routine> Routines { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Domain.Equipments
 
         public Equipment()
         {
-            
+
         }
 
         public static Equipment Create(int id, string name, string description)
@@ -39,12 +39,17 @@ namespace Domain.Equipments
         }
 
         [Key]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(40, MinimumLength = 2)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(100, MinimumLength = 2)]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
         [JsonIgnore]

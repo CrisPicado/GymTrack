@@ -21,10 +21,4 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Equipments\" />
-	<Folder Include="Exercises\" />
-
-  </ItemGroup>
-
 </Project>

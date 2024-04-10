@@ -1,0 +1,46 @@
+﻿@using Domain.Equipments;
+@model List<EquipmentDTO>
+
+@{
+    ViewData["Title"] = "Equipmets";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="text-center my-2">List of Equipments</h3>
+        <a asp-action="Create" asp-controller="Equipments" class="btn btn-success">Create</a>
+    </div>
+
+    <div class="card-body">
+
+        <table id="equipments" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var equipment in Model)
+                {
+                    <tr>
+                        <td>@equipment.Name</td>
+                        <td>@equipment.Description</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Equipments Actions">
+                                <a type="button" class="btn btn-info mx-2" asp-action="Update" asp-route-id="@equipment.Id">Edit</a>
+                                <form method="post" asp-action="Delete" asp-route-id="@equipment.Id" onsubmit="return confirm('Are you sure you want to delete this equipment?');">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

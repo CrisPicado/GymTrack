@@ -1,0 +1,62 @@
+﻿@using Domain.Exercises;
+@using Web.Models;
+
+@model CreateExercise;
+
+@{
+    ViewData["Title"] = "Create Exercise";
+}
+
+<h1 class="display-4">Create Exercise</h1>
+<hr />
+<div class="container">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group my-3">
+                    <label asp-for="Name" class="form-label">Name:</label>
+                    <input asp-for="Name" type="text" id="Name" name="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="TargetZone" class="form-label">Target Zone:</label>
+                    <input asp-for="TargetZone" type="text" id="TargetZone" name="TargetZone" class="form-control" />
+                    <span asp-validation-for="TargetZone" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="Sets" class="form-label">Sets:</label>
+                    <input asp-for="Sets" type="number" id="Sets" name="Sets" class="form-control" />
+                    <span asp-validation-for="Sets" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="Repeats" class="form-label">Repeats:</label>
+                    <input asp-for="Repeats" type="number" id="Repeats" name="Repeats" class="form-control" />
+                    <span asp-validation-for="Repeats" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="Weight" class="form-label">Weight:</label>
+                    <input asp-for="Weight" type="number" step="any" id="Weight" name="Weight" class="form-control" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="EquipmentId" class="form-label">Equipment:</label>
+                    <select asp-for="EquipmentId" class="form-control">
+                        <option value="">Select Equipment</option>
+                        @foreach (var equipment in Model.AvailableEquipments)
+                        {
+                            <option value="@equipment.Id">@equipment.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="EquipmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group my-3">
+                @{
+                    var partialModel = SaveCancelViewModel.Create(0, "/exercises");
+                }
+                <partial name="_SaveCancelButtons" model="partialModel" />
+            </div>
+        </div>
+    </form>
+</div>

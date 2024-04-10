@@ -13,9 +13,18 @@ namespace Application.Equipments
     {
         public EquipmentsProfile()
         {
-            CreateMap<CreateEquiments, Equipment>();
+
+            CreateMap<CreateEquipments, Equipment>();
+
             CreateMap<UpdateEquipments, Equipment>()
+
                 .ForMember(destination => destination.Id, source => source.Ignore());
+
+            CreateMap<Equipment, UpdateEquipments>();
+
+            CreateMap<Equipment, EquipmentDTO>()
+               .ConstructUsing(source =>
+               new EquipmentDTO(source.Id, source.Name, source.Description));
         }
     }
 }

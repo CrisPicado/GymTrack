@@ -14,6 +14,8 @@ using FluentValidation;
 using Domain.Clients;
 using Domain.Routines;
 using Domain.Coaches;
+using Domain.Equipments;
+using Domain.Exercises;
 
 namespace Application
 {
@@ -37,8 +39,16 @@ namespace Application
             //FluentValidation
             services.AddScoped<IValidator<CreateClient>,CreateClientValidator>();
             services.AddScoped<IValidator<UpdateClient>, UpdateClientValidator>();
+            
             services.AddScoped<IValidator<CreateCoach>, CreateCoachValidator>();
             services.AddScoped<IValidator<UpdateCoach>, UpdateCoachValidator>();
+            
+            services.AddScoped<IValidator<CreateEquipments>, CreateEquipmentsValidator>();
+            services.AddScoped<IValidator<UpdateEquipments>, UpdateEquipmentsValidator>();
+
+            services.AddScoped<IValidator<CreateExercise>, CreateExerciseValidator>();
+            services.AddScoped<IValidator<UpdateExercise>, UpdateExerciseValidator>();
+
             services.AddScoped<IValidator<CreateRoutine>,CreateRoutineValidator>();
             services.AddScoped<IValidator<UpdateRoutine>,UpdateRoutineValidator>();
 

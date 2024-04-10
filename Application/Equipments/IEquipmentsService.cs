@@ -14,7 +14,7 @@ namespace Application.Equipments
         Result<IList<Equipment>> List();
         Result<Equipment> Get(int id);
 
-        Result Create(CreateEquiments createEquiments);
+        Result Create(CreateEquipments createEquiments);
         Result Update(UpdateEquipments updateEquiments);
         Result Delete(int id);
     }

@@ -4,6 +4,8 @@ using Persistence;
 using Domain.Configuration;
 using Application.Routines;
 using Application.Coaches;
+using Application.Equipments;
+using Application.Exercises;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,22 @@ builder.Services.AddHttpClient<IClientContract, ClientImp>((provider, client) =>
 });
 
 builder.Services.AddHttpClient<ICoachClient, CoachClient>((provider, client) =>
+{
+    var endpoint = endpoints.Where
+        (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+    client.BaseAddress = new Uri(endpoint.Uri);
+
+});
+
+builder.Services.AddHttpClient<IEquipmentsClient, EquipmentsClient>((provider, client) =>
+{
+    var endpoint = endpoints.Where
+        (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+    client.BaseAddress = new Uri(endpoint.Uri);
+
+});
+
+builder.Services.AddHttpClient<IExerciseClient, ExerciseClient>((provider, client) =>
 {
     var endpoint = endpoints.Where
         (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
