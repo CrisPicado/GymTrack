@@ -13,11 +13,17 @@ namespace Domain.Routines
     {
         public RoutineDTO() { }
 
-        public RoutineDTO(int id, string name, string description)
+        public RoutineDTO(int id, string name, string description, int sequenceNumber, int coachId, Coach coach, int clientId, Client client, List<Exercise> exercises)
         {
             Id = id;
             Name = name;
             Description = description;
+            SequenceNumber = sequenceNumber;
+            CoachId = coachId;
+            Coach = coach;
+            ClientId = clientId;
+            Client = client;
+            Exercises = exercises;
         }
 
         public int Id { get; set; }

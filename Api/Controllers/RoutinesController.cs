@@ -62,7 +62,7 @@ namespace Api.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Update([FromBody] UpdateRoutine routine)
         {
             var result = _service.Update(routine);

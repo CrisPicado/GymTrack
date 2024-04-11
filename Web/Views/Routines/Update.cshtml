@@ -1,0 +1,61 @@
+﻿@using Domain.Routines
+@using Web.Models
+
+@model UpdateRoutine
+
+@{
+    ViewData["Title"] = "Update Routine";
+}
+
+<h1 class="display-4">Update Routine</h1>
+<hr />
+<div class="container">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group my-3">
+                    <label asp-for="@Model.Name" class="form-label">Name:</label>
+                    <input asp-for="@Model.Name" type="text" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.Description" class="form-label">Description:</label>
+                    <input asp-for="@Model.Description" type="text" class="form-control" />
+                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.SequenceNumber" class="form-label">Sequence Number:</label>
+                    <input asp-for="@Model.SequenceNumber" type="number" class="form-control" />
+                    <span asp-validation-for="@Model.SequenceNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.CoachId" class="form-label">Coach:</label>
+                    <select asp-for="@Model.CoachId" asp-items="@Model.Coachs.Select(c => new SelectListItem { Text = c.FullName, Value = c.Id.ToString(), Selected = c.Id == Model.CoachId })" class="form-control">
+                        <option value="">Select Coach</option>
+                    </select>
+                    <span asp-validation-for="@Model.CoachId" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="@Model.ClientId" class="form-label">Client:</label>
+                    <select asp-for="@Model.ClientId" asp-items="@Model.Clients.Select(c => new SelectListItem { Text = c.FullName, Value = c.Id.ToString(), Selected = c.Id == Model.ClientId })" class="form-control">
+                        <option value="">Select Client</option>
+                    </select>
+                    <span asp-validation-for="@Model.ClientId" class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label class="form-label">Exercises:</label>
+                    <select asp-for="@Model.ExerciseIds" asp-items="@Model.Exercises.Select(e => new SelectListItem { Text = e.Name, Value = e.Id.ToString(), Selected = Model.ExerciseIds.Contains(e.Id) })" multiple class="form-control">
+                    </select>
+                    <span asp-validation-for="@Model.ExerciseIds" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group my-3">
+            @{
+                var partialModel = SaveCancelViewModel.Create(Model.Id, "/routines");
+            }
+            <partial name="_SaveCancelButtons" model="partialModel" />
+        </div>
+    </form>
+</div>

@@ -18,6 +18,16 @@ namespace Application.Routines
             CreateMap<UpdateRoutine, Routine>()
             .ForMember(destination => destination.Id, source => source.Ignore());
 
+            CreateMap<Routine, UpdateRoutine>()
+                .ForMember(dest => dest.CoachId, opt => opt.MapFrom(src => src.Coach.Id))
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
+                .ForMember(dest => dest.ExerciseIds, opt => opt.MapFrom(src => src.Exercises.Select(e => e.Id).ToList()));
+
+            CreateMap<Routine, RoutineDTO>()
+                .ConstructUsing(source =>
+                new RoutineDTO(source.Id, source.Name, source.Description, source.SequenceNumber,
+                source.CoachId, source.Coach, source.ClientId, source.Client, source.Exercises));
+
         }
 
     }

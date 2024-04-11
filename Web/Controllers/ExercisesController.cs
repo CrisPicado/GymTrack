@@ -65,7 +65,7 @@ namespace Web.Controllers
         {
             Result<Exercise> result = await _exercises.Get(id);
             UpdateExercise updateExercise = _mapper.Map<UpdateExercise>(result.Value);
-
+                
             updateExercise.AvailableEquipments = await _equipment.List();
             return View(updateExercise);
         }

@@ -20,9 +20,12 @@ namespace Domain.Routines
         public int SequenceNumber { get; set; }
 
         public int CoachId { get; set; }
+        public List<CoachDTO> Coachs { get; set; }
 
         public int ClientId { get; set; }
+        public List<ClientDTO> Clients { get; set; }
 
         public List<int> ExerciseIds { get; set; }
+        public List<ExerciseDTO> Exercises { get; set; }
     }
 }

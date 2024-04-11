@@ -19,6 +19,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Created By Coach</th>
+                    <th>Created To</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                         <td>@routine.Name</td>
                         <td>@routine.Description </td>
                         <td>@routine.Coach.FullName</td>
+                        <td>@routine.Client.FullName</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Client Actions">
                                 <a type="button" class="btn btn-info mx-2" asp-action="Update" asp-route-id="@routine.Id">Edit</a>
