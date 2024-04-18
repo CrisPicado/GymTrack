@@ -6,11 +6,13 @@ using Application.Routines;
 using Application.Coaches;
 using Application.Equipments;
 using Application.Exercises;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 
@@ -78,6 +80,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//Usar primero Authentication
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

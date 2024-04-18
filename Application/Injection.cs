@@ -16,6 +16,7 @@ using Domain.Routines;
 using Domain.Coaches;
 using Domain.Equipments;
 using Domain.Exercises;
+using Application.Identity;
 
 namespace Application
 {
@@ -30,6 +31,7 @@ namespace Application
             services.AddScoped<IExerciseService, ExerciseService>();
             services.AddScoped<IEquipmentsService, EquipmentsService>();
             services.AddScoped<IRoutineService, RoutineService>();
+            services.AddScoped<IIdentityService, IdentityService>();
             //mapper
             services.AddAutoMapper(typeof(ClientProfile));
             services.AddAutoMapper(typeof(CoachProfile));
@@ -51,6 +53,9 @@ namespace Application
 
             services.AddScoped<IValidator<CreateRoutine>,CreateRoutineValidator>();
             services.AddScoped<IValidator<UpdateRoutine>,UpdateRoutineValidator>();
+
+            //ValidationAssemblies
+            services.AddValidatorsFromAssemblies(new[] {typeof(CreateClientValidator).Assembly});
 
             return services;
         }

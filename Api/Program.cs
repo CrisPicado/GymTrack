@@ -1,5 +1,6 @@
 using Application;
 using Persistence;
+using Infrastructure;
 using System.Text.Json.Serialization;
 
 const string LOCAL_HOST_CORS = "Web";
@@ -27,6 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 

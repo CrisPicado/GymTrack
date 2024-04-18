@@ -1,0 +1,33 @@
+﻿@using Domain.Account;
+
+
+@model AccountViewModel
+
+
+@{
+	ViewData["Title"] = "SignUp";
+}
+<h1 class="display-4">SignUp</h1>
+<hr />
+<div class="container">
+	<form method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group my-3">
+					<label asp-for="@Model.Email" class="form-label">Email:</label>
+					<input asp-for="@Model.Email" type="email" id="email" name="email" class="form-control" />
+					<span asp-validation-for="@Model.Email" class="text-danger"></span>
+				</div>
+				<div class="form-group my-3">
+					<label asp-for="@Model.Password" class="form-label">Password:</label>
+					<input asp-for="@Model.Password" type="password" id="password" name="password" class="form-control" />
+					<span asp-validation-for="@Model.Password" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+			<div class="form-group my-3">
+				<button type="submit" class="btn btn-success">Signup</button>
+			</div>
+	</form>
+</div>
