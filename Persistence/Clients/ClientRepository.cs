@@ -1,13 +1,8 @@
 ﻿using Application.Clients;
-using Application.Repositories;
 using Domain.Clients;
 using Persistence.Contexts;
-using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.Repositories;
+
 
 namespace Persistence.Clients
 {

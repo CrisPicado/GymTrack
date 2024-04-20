@@ -1,7 +1,7 @@
 ﻿using Application.Equipments;
 using Domain.Equipments;
 using Persistence.Contexts;
-using Persistence.Repositories;
+using Shared.Repositories;
 
 namespace Persistence.Equipments
 {

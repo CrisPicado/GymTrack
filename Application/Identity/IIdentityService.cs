@@ -8,6 +8,5 @@ namespace Application.Identity
 {
     public interface IIdentityService : IAccountService
     {
-        Task<bool> HasAccess(string email, string controller, string action);
     }
 }

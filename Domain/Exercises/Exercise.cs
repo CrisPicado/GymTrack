@@ -1,5 +1,6 @@
 ﻿using Domain.Equipments;
 using Domain.Routines;
+using Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -71,6 +71,12 @@ namespace Web.Controllers
 			await _accountService.SignOut();
 			return RedirectToAction("Index", "Home");
 		}
-	}
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
 }
 

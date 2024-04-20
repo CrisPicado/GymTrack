@@ -1,7 +1,7 @@
 ﻿using Application.Coaches;
 using Domain.Coaches;
 using Persistence.Contexts;
-using Persistence.Repositories;
+using Shared.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

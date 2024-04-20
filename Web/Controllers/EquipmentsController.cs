@@ -3,6 +3,7 @@ using Application.Equipments;
 using AutoMapper;
 using Domain.Equipments;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Web.Extensions;
@@ -24,6 +25,7 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         public async Task<IActionResult> Index()
         {
             var equipments = await _equipment.List();

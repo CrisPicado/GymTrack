@@ -3,6 +3,7 @@ using Application.Exercises;
 using AutoMapper;
 using Domain.Exercises;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Web.Extensions;
@@ -26,6 +27,7 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         public async Task<IActionResult> Index()
         {
             var exercises = await _exercises.List();

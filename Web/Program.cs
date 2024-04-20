@@ -7,6 +7,7 @@ using Application.Coaches;
 using Application.Equipments;
 using Application.Exercises;
 using Infrastructure;
+using Infrastructure.Policy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +64,59 @@ builder.Services.AddHttpClient<IRoutineClient, RoutineClient>((provider, client)
         (s => s.Name.Equals("DefaultApi", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
     client.BaseAddress = new Uri(endpoint.Uri);
 
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.LoginPath = "/Account/SignIn";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Clients.Read", policy => {
+        policy.AddRequirements(new PolicyRequirement(new List<PolicyPermission>()
+        {
+            new PolicyPermission("Clients", "Index"),
+        }));
+    });
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Coaches.Read", policy => {
+        policy.AddRequirements(new PolicyRequirement(new List<PolicyPermission>()
+        {
+            new PolicyPermission("Coaches", "Index"),
+        }));
+    });
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Equipments.Read", policy => {
+        policy.AddRequirements(new PolicyRequirement(new List<PolicyPermission>()
+        {
+            new PolicyPermission("Equipments", "Index"),
+        }));
+    });
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Exercises.Read", policy => {
+        policy.AddRequirements(new PolicyRequirement(new List<PolicyPermission>()
+        {
+            new PolicyPermission("Exercises", "Index"),
+        }));
+    });
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Routines.Read", policy => {
+        policy.AddRequirements(new PolicyRequirement(new List<PolicyPermission>()
+        {
+            new PolicyPermission("Routines", "Index"),
+        }));
+    });
 });
 
 var app = builder.Build();

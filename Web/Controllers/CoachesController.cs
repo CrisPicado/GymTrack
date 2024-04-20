@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain.Coaches;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Web.Extensions;
@@ -22,6 +23,7 @@ namespace Web.Controllers
             _client = client;
             _mapper = mapper;
         }
+        [Authorize(Policy = "Coaches.Read")]
         public async Task<IActionResult> Index()
         {
             var coaches = await _client.List();

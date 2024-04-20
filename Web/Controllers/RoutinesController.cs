@@ -5,6 +5,7 @@ using Application.Routines;
 using AutoMapper;
 using Domain.Routines;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using Shared;
@@ -33,6 +34,7 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Policy = "Routines.Read")]
         public async Task<IActionResult> Index()
         {
             var routines = await _routine.List();

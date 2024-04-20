@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Domain.Routines;
 using Application.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Domain.Authorization;
 
 namespace Infrastructure.Contexts
 {
@@ -23,7 +24,7 @@ namespace Infrastructure.Contexts
         {
 
         }
-
+        public DbSet<Permission> Permissions { get; set; }
 
     }
 }
