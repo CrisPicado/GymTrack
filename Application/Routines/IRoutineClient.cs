@@ -1,10 +1,5 @@
 ﻿using Domain.Routines;
 using Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Routines
 {
@@ -15,5 +10,6 @@ namespace Application.Routines
         Task<Result> Update(UpdateRoutine updateClient);
         Task<Result> Delete(int id);
         Task<Result<Routine>> Get(int id);
+        Task<List<RoutineDTO>> GetRoutinesForClient(string email);
     }
 }

@@ -19,5 +19,7 @@ namespace Application.Routines
         Result Update(UpdateRoutine updateRoutine);
 
         Result Delete(int id);
+
+        Result<IList<Routine>> GetRoutinesForClientAsync(string Email);
     }
 }

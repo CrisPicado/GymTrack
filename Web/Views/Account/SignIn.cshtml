@@ -1,34 +1,69 @@
-﻿@using Domain.Account;
-
+﻿@using Domain.Account
 
 @model AccountViewModel
 
+@{
+    ViewData["Title"] = "SignIn";
+}
 
 @{
-	ViewData["Title"] = "SignIn";
+    Layout = null;
 }
-<h1 class="display-4">SignIn</h1>
-<hr />
-<div class="container">
-	<form method="post">
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group my-3">
-					<label asp-for="@Model.Email" class="form-label">Email:</label>
-					<input asp-for="@Model.Email" type="email" id="email" name="email" class="form-control" />
-					<span asp-validation-for="@Model.Email" class="text-danger"></span>
-				</div>
-				<div class="form-group my-3">
-					<label asp-for="@Model.Password" class="form-label">Password:</label>
-					<input asp-for="@Model.Password" type="password" id="password" name="password" class="form-control" />
-					<span asp-validation-for="@Model.Password" class="text-danger"></span>
-				</div>
-			</div>
-		</div>
-			<div class="form-group my-3">
-				<button type="submit" class="btn btn-success">Signin</button>
-			</div>
-	</form>
-</div>
 
+<style>
+    .black-background {
+        background-color: gray;
+    }
+
+    .texts-black
+    {
+        color: black;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to gymTrack</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="black-background">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-warning text-white">
+                        <h1 class="display-4 text-center texts-black">Welcome to GymTrack</h1>
+                        <br />
+                        <img src="https://static.vecteezy.com/system/resources/previews/003/108/337/large_2x/fitness-gym-logo-with-strong-athlete-and-barbell-vector.jpg" alt="gymTrack Logo" class="img-fluid mx-auto d-block mb-3" style="max-width: 150px;" />
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Sign In</h2>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Email" class="form-label">Email:</label>
+                                <input asp-for="@Model.Email" type="email" id="email" name="email" class="form-control" />
+                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Password" class="form-label">Password:</label>
+                                <input asp-for="@Model.Password" type="password" id="password" name="password" class="form-control" />
+                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark btn-block">Sign In</button>
+                                <hr />
+                                <a href="javascript:history.back()" class="btn btn-secondary btn-block">Volver</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

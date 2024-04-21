@@ -1,8 +1,7 @@
 ﻿using Application.Routines;
 using Domain.Routines;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using Shared;
 
 namespace Api.Controllers
 {
@@ -28,6 +27,17 @@ namespace Api.Controllers
             }
 
             return (IList<Routine>)StatusCode(StatusCodes.Status500InternalServerError, null);
+        }
+
+        [HttpGet("ClientRoutines/{Email}")]
+        public IList<Routine> GetRoutinesForClient(string Email)
+        {
+            var routines = _service.GetRoutinesForClientAsync(Email);
+            if (routines == null)
+            {
+                return (IList<Routine>)StatusCode(StatusCodes.Status500InternalServerError, null);
+            }
+            return routines.Value;
         }
 
         [HttpGet]
@@ -97,6 +107,9 @@ namespace Api.Controllers
 
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
+
+
+
 
     }
 }

@@ -32,12 +32,14 @@ namespace Web.Controllers
             return View(equipments);
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         [HttpGet]
         public IActionResult Create()
         {
             return View(new CreateEquipments());
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateEquipments model)
         {
@@ -58,6 +60,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         [HttpGet("/equipments/update/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
@@ -66,6 +69,7 @@ namespace Web.Controllers
             return View(updateEquipments);
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         [HttpPost("/equipments/update/{id}")]
         public async Task<IActionResult> Update(UpdateEquipments model)
         {
@@ -87,6 +91,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Equipments.Read")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
