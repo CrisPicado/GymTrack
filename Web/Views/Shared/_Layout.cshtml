@@ -1,6 +1,40 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 
 @inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var email = "";
+    if (User.Identity.IsAuthenticated)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        email = user?.Email;
+    }
+    else
+    {
+        email = "Usuario no autenticado";
+    }
+}
+
+
+@{
+    var authorizationResult = await AuthorizationService.AuthorizeAsync(User, "Coaches.Read");
+    var isCoach = authorizationResult.Succeeded;
+
+    var authorizationResultClient = await AuthorizationService.AuthorizeAsync(User, "Clients.Read");
+    var isClient = authorizationResultClient.Succeeded;
+
+    var authorizationResultEquipmet = await AuthorizationService.AuthorizeAsync(User, "Equipments.Read");
+    var isEquipment = authorizationResultEquipmet.Succeeded;
+
+    var authorizationResultExercises = await AuthorizationService.AuthorizeAsync(User, "Exercises.Read");
+    var isExercises = authorizationResultExercises.Succeeded;
+
+    var authorizationResultRoutines = await AuthorizationService.AuthorizeAsync(User, "Routines.Read");
+    var isRoutines = authorizationResultRoutines.Succeeded;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +66,23 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            @if (!isClient || !isCoach || !isEquipment || !isRoutines || !isExercises)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Routines" asp-action="ClientRoutines" asp-route-email="@email">
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                        <span>My Routines</span>
+                                    </a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">
                                     <i class="fa-solid fa-sign-in-alt"></i>
                                     <span>Sign Out</span>
                                 </a>
                             </li>
+                            @if (isClient || isCoach || isEquipment || isRoutines || isExercises)
+                            {
                             <li class="nav-item">                             
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">
                                     <i class="fa-solid fa-add"></i>
@@ -50,9 +95,6 @@
                                     <span>Routines Management</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Access Management and Privileges</a>
-                            </li>
                             <li>
                                 <div class="dropdown">
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button"
@@ -61,13 +103,18 @@
                                         <span>Maintenances</span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-controller="Equipments" asp-action="Index">Equipments</a></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Equipments" asp-action="Index">Equipments</a>
+                                        </li>
                                         <li><a class="dropdown-item" asp-controller="Exercises" asp-action="Index">Exercises</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                        </li>
                                         <li><a class="dropdown-item" asp-controller="Clients" asp-action="Index">Clients</a></li>
                                     </ul>
                                 </div>
                             </li>
+                            }
                         }
                         else
                         {
@@ -96,11 +143,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

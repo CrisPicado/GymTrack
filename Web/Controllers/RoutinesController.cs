@@ -5,6 +5,7 @@ using Application.Routines;
 using AutoMapper;
 using Domain.Routines;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using Shared;
@@ -33,12 +34,14 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Policy = "Routines.Read")]
         public async Task<IActionResult> Index()
         {
             var routines = await _routine.List();
             return View(routines);
         }
 
+        [Authorize(Policy = "Routines.Read")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -51,6 +54,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Routines.Read")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateRoutine model)
         {
@@ -74,6 +78,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("routines/update/{id}")]
+        [Authorize(Policy = "Routines.Read")]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
             Result<Routine> result = await _routine.Get(id);
@@ -87,6 +92,7 @@ namespace Web.Controllers
             return View(updateRoutine);
         }
 
+        [Authorize(Policy = "Routines.Read")]
         [HttpPost("/routines/update/{id}")]
         public async Task<IActionResult> Update(UpdateRoutine model)
         {
@@ -107,6 +113,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Routines.Read")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -124,6 +131,14 @@ namespace Web.Controllers
 
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
+
+        [HttpGet("routines/ClientRoutines/{Email}")]
+        public async Task<IActionResult> ClientRoutines(string email)
+        {
+            var routines = await _routine.GetRoutinesForClient(email);
+            return View(routines);
+        }
+
 
     }
 }

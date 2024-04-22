@@ -3,6 +3,7 @@ using Application.Exercises;
 using AutoMapper;
 using Domain.Exercises;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Web.Extensions;
@@ -26,12 +27,14 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         public async Task<IActionResult> Index()
         {
             var exercises = await _exercises.List();
             return View(exercises);
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -40,6 +43,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateExercise model)
         {
@@ -60,6 +64,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         [HttpGet("/exercises/update/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
@@ -70,6 +75,7 @@ namespace Web.Controllers
             return View(updateExercise);
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         [HttpPost("/exercises/update/{id}")]
         public async Task<IActionResult> Update(UpdateExercise model)
         {
@@ -91,6 +97,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Exercises.Read")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

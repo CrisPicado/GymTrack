@@ -1,15 +1,8 @@
-﻿using Application.Clients;
-using Application.Exercises;
-using Domain.Clients;
+﻿using Application.Exercises;
 using Domain.Exercises;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
-using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.Repositories;
 
 namespace Persistence.Exercises
 {
@@ -22,9 +15,10 @@ namespace Persistence.Exercises
 
         public IQueryable<Exercise> GetAllIncluding()
         {
-            return _context.Exercises
-                .Include(e=>e.Equipment)
-                .Include(r=>r.Routines);
+            return _context.Set<Exercise>()
+                .Include(e => e.Equipment)
+                .Include(r => r.Routines);
         }
+
     }
 }

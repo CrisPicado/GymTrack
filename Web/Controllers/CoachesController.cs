@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain.Coaches;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Web.Extensions;
@@ -22,18 +23,21 @@ namespace Web.Controllers
             _client = client;
             _mapper = mapper;
         }
+        [Authorize(Policy = "Coaches.Read")]
         public async Task<IActionResult> Index()
         {
             var coaches = await _client.List();
             return View(coaches);
         }
 
+        [Authorize(Policy = "Coaches.Read")]
         [HttpGet]
         public IActionResult Create()
         {
             return View(new CreateCoach());
         }
 
+        [Authorize(Policy = "Coaches.Read")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCoach model)
         {
@@ -54,6 +58,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Coaches.Read")]
         [HttpGet("/coaches/update/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
@@ -62,6 +67,7 @@ namespace Web.Controllers
             return View(updateCoach);
         }
 
+        [Authorize(Policy = "Coaches.Read")]
         [HttpPost("/coaches/update/{id}")]
         public async Task<IActionResult> Update(UpdateCoach model)
         {
@@ -83,6 +89,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "Coaches.Read")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

@@ -15,7 +15,7 @@ using Persistence.Coaches;
 using Persistence.Contexts;
 using Persistence.Exercises;
 using Persistence.Equipments;
-using Persistence.Repositories;
+using Shared.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

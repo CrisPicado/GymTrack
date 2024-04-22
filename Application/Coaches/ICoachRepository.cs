@@ -1,5 +1,6 @@
-﻿using Application.Repositories;
+﻿
 using Domain.Coaches;
+using Shared.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,11 +3,6 @@ using AutoMapper;
 using Domain.Exercises;
 using Domain.Routines;
 using Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Routines
 {
@@ -42,6 +37,12 @@ namespace Application.Routines
         {
             var routines = _repository.GetAllIncluding().ToList();
 
+            return Result.Success<IList<Routine>>(routines);
+        }
+
+        public Result<IList<Routine>> GetRoutinesForClientAsync(string Email)
+        {
+            var routines = _repository.GetAllIncluding().Where(r => r.Client.Email == Email).ToList();
             return Result.Success<IList<Routine>>(routines);
         }
 
@@ -97,6 +98,8 @@ namespace Application.Routines
             _repository.Save();
             return Result.Success();
         }
+
+
 
     }
 }

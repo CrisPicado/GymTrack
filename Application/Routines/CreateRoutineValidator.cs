@@ -13,7 +13,7 @@ namespace Application.Routines
         public CreateRoutineValidator() 
         {
             RuleFor(r => r.Name).Length(3, 100);
-            RuleFor(r => r.Description).Length(10, 255);
+            RuleFor(r => r.Description).Length(1, 255);
             RuleFor(r => r.SequenceNumber).GreaterThan(0);
             RuleFor(r => r.CoachId).GreaterThan(0);
             RuleFor(r => r.ClientId).GreaterThan(0);

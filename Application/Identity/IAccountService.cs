@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared;
+﻿using Shared;
 
 namespace Application.Identity
 {
@@ -14,5 +9,7 @@ namespace Application.Identity
         Task<Result> SignIn(string email, string password);
 
         Task SignOut();
+
+        Result HasAccess(string email, string controller, string action);
     }
 }

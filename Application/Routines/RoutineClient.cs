@@ -1,16 +1,10 @@
-﻿using Application.Clients;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Configuration;
 using Domain.Routines;
 using Microsoft.Extensions.Options;
 using Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Application.Routines
 {
@@ -40,6 +34,34 @@ namespace Application.Routines
             var routines = JsonSerializer.Deserialize<List<RoutineDTO>>(content, options);
 
             return  _mapper.Map<List<RoutineDTO>>(routines);
+        }
+
+        public async Task<List<RoutineDTO>> GetRoutinesForClient(string email)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            try
+            {
+                var endpoint = _endpoints
+                    .Where(w => w.Name.Equals("Routines", StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault();
+                var apiUrl = endpoint.Uri + "/ClientRoutines/" + email;
+
+                var content = await _client.GetStringAsync(apiUrl);
+
+
+                var routines = JsonSerializer.Deserialize<List<RoutineDTO>>(content, options);
+
+                return _mapper.Map<List<RoutineDTO>>(routines);
+            }
+            catch (HttpRequestException ex)
+            {
+                return new List<RoutineDTO>();
+            }
+
         }
 
 
@@ -79,5 +101,8 @@ namespace Application.Routines
                 ? Result.Success()
                 : Result.Failure(RoutineErrors.NotDeleted());
         }
+
+       
+
     }
 }

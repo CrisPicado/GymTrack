@@ -1,0 +1,76 @@
+﻿@using Domain.Routines
+@model List<RoutineDTO>
+@{
+    ViewData["Title"] = "Routines For Client";
+}
+<style>
+    .yellow-background {
+        background-color:orange;
+    }
+
+    .black-background {
+        background-color: grey;
+        color: white;
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var routine in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-header yellow-background">
+                        <h5 class="card-title">@routine.Name</h5>
+                    </div>
+                    <div class="card-body black-background">
+                        @if (routine.Coach != null || routine.Description != null || routine.SequenceNumber != 0
+                       || routine.Exercises != null)
+                        {
+                            <p class="card-text">Coach: @routine.Coach.FullName</p>
+                            <p class="card-text">Description: @routine.Description</p>
+                            <p class="card-text">Sequence: @routine.SequenceNumber</p>
+                            <p class="card-text">Exercises</p>
+                            <hr class="border-bottom">
+                            @if (routine.Exercises.Any())
+                            {
+                                @foreach (var exercise in @routine.Exercises)
+                                {
+                                    <p class="card-text">Exercise: @exercise.Name</p>
+                                    <p class="card-text">Repeats: @exercise.Repeats</p>
+                                    <p class="card-text">Approach: @exercise.TargetZone</p>
+                                    <hr class="border-bottom">
+                                }
+                            }
+                            else
+                            {
+                                <p class="card-text">No Exercises</p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="card-text">Coach: Unknown</p>
+                            <p class="card-text">No Descripcion</p>
+                            <p class="card-text">Exercises</p>
+                            <hr class="border-bottom">
+                            @foreach (var exercise in @routine.Exercises)
+                            {
+                                <p class="card-text">No Exercises</p>
+
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <hr />
+        <a href="javascript:history.back()" class="btn btn-secondary btn-block">Volver</a>
+    </div>
+}
+else
+{
+    <p>No routines found for this client.</p>
+}

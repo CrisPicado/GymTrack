@@ -4,11 +4,6 @@ using Application.Exercises;
 using Application.Equipments;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Routines;
 using FluentValidation;
 using Domain.Clients;
@@ -32,30 +27,21 @@ namespace Application
             services.AddScoped<IEquipmentsService, EquipmentsService>();
             services.AddScoped<IRoutineService, RoutineService>();
             services.AddScoped<IIdentityService, IdentityService>();
+
             //mapper
             services.AddAutoMapper(typeof(ClientProfile));
             services.AddAutoMapper(typeof(CoachProfile));
             services.AddAutoMapper(typeof(ExerciseProfile));
             services.AddAutoMapper(typeof(EquipmentsProfile));
             services.AddAutoMapper(typeof(RoutineProfile));
-            //FluentValidation
-            services.AddScoped<IValidator<CreateClient>,CreateClientValidator>();
-            services.AddScoped<IValidator<UpdateClient>, UpdateClientValidator>();
-            
-            services.AddScoped<IValidator<CreateCoach>, CreateCoachValidator>();
-            services.AddScoped<IValidator<UpdateCoach>, UpdateCoachValidator>();
-            
-            services.AddScoped<IValidator<CreateEquipments>, CreateEquipmentsValidator>();
-            services.AddScoped<IValidator<UpdateEquipments>, UpdateEquipmentsValidator>();
-
-            services.AddScoped<IValidator<CreateExercise>, CreateExerciseValidator>();
-            services.AddScoped<IValidator<UpdateExercise>, UpdateExerciseValidator>();
-
-            services.AddScoped<IValidator<CreateRoutine>,CreateRoutineValidator>();
-            services.AddScoped<IValidator<UpdateRoutine>,UpdateRoutineValidator>();
 
             //ValidationAssemblies
             services.AddValidatorsFromAssemblies(new[] {typeof(CreateClientValidator).Assembly});
+            services.AddValidatorsFromAssemblies(new[] { typeof(CreateCoachValidator).Assembly });
+            services.AddValidatorsFromAssemblies(new[] { typeof(CreateEquipmentsValidator).Assembly });
+            services.AddValidatorsFromAssemblies(new[] { typeof(CreateExerciseValidator).Assembly });
+            services.AddValidatorsFromAssemblies(new[] { typeof(CreateRoutineValidator).Assembly });
+
 
             return services;
         }

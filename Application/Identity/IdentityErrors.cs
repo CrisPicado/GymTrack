@@ -9,8 +9,12 @@ namespace Application.Identity
 {
     public static class IdentityErrors
     {
-        public static Error NotCreated() => new Error("Identity.NOT_CREATED", "The user could not be created.");
+        public static Error NotCreated() => 
+            new Error("Identity.NOT_CREATED", "The user could not be created.");
 
-        public static Error InvalidUserOrPassword() => new Error("Identity.INVALID_USER_OR_PASSWORD", "The user and/or password are invalid.");
+        public static Error InvalidUserOrPassword() => 
+            new Error("Identity.INVALID_USER_OR_PASSWORD", "The user and/or password are invalid.");
+        public static Error AccessDenied() =>
+            new Error("Students.ACCESS_DENIED", $"The user has not access.");
     }
 }

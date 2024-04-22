@@ -8,11 +8,13 @@ namespace Infrastructure.Identity
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IPermissionRepository _permissionsRepository;
 
-        public AccountService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IPermissionRepository permissionsRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _permissionsRepository = permissionsRepository;
         }
 
         public async Task<Result> SignIn(string email, string password)
@@ -43,6 +45,14 @@ namespace Infrastructure.Identity
             await _signInManager.SignOutAsync();
         }
 
-
+        public Result HasAccess(string email, string controller, string action)
+        {
+            bool hasAccess = _permissionsRepository.HasAccess(email, controller, action);
+            if (hasAccess)
+            {
+                return Result.Success();
+            }
+            return Result.Failure(IdentityErrors.AccessDenied());
+        }
     }
 }

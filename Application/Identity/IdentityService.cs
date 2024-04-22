@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared;
+﻿using Shared;
 
 namespace Application.Identity
 {
@@ -13,10 +8,6 @@ namespace Application.Identity
         public IdentityService(IAccountService accountService) 
         {
 			_accountService = accountService;   
-        }
-        public Task<bool> HasAccess(string email, string controller, string action)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Result> SignIn(string email, string password)
@@ -35,6 +26,11 @@ namespace Application.Identity
             await _accountService.SignOut(); 
         }
 
-      
+        public Result HasAccess(string email, string controller, string action)
+        {
+            return _accountService.HasAccess(email, controller, action);
+        }
+
+
     }
 }

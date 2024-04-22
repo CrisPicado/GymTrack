@@ -1,5 +1,6 @@
 ﻿using Application.Identity;
 using Domain.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -7,11 +8,13 @@ namespace Web.Controllers
 	public class AccountController : Controller
 	{
 		public IAccountService _accountService;
+        private readonly IAuthorizationService _authorizationService;
 
-		public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IAuthorizationService authorizationService)
 		{
 			_accountService = accountService;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		[HttpGet]
 		public async Task<IActionResult> SignIn()
@@ -71,6 +74,12 @@ namespace Web.Controllers
 			await _accountService.SignOut();
 			return RedirectToAction("Index", "Home");
 		}
-	}
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
 }
 

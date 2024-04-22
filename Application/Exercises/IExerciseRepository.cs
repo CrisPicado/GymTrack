@@ -1,4 +1,4 @@
-﻿using Application.Repositories;
+﻿using Shared.Repositories;
 using Domain.Exercises;
 using Domain.Routines;
 using System;

@@ -1,10 +1,6 @@
-﻿using Application.Repositories;
-using Domain.Clients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Clients;
+using Shared.Repositories;
+
 
 
 namespace Application.Clients
